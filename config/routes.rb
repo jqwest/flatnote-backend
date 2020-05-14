@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-  # root 'notes#index'
-
-  resources :users
+  resources :users, only: [:create]
 	resources :notes
-  
+  resources :tags
+  resources :notes_tags
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  post '/login', to: 'auth#create'
+  get '/profile', to: 'users#profile'
+ 
 end
-# Rails.application.routes.draw do
-#   root ‘cars#index’
-#   resources :cars
-#   end
