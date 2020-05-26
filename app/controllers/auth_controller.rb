@@ -1,19 +1,23 @@
 class AuthController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  # skip_before_action :authorized, only: [:create]
+  def login
+    user = User.find_by(username: params[:username])
 
-  def create
-    @user = User.find_by(username: user_login_params[:username])
-    if @user && @user.authenticate(user_login_params[:password])
-      token = encode_token({ user_id: @user.id })
-      render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
+    if !user
+        render status: :unauthorized
     else
-      render json: { message: 'Invalid username or password' }, status: :unauthorized
+        if user.authenticate(params[:password])
+            secret_key = Rails.application.secrets.secret_key_base[0]
+            token = JWT.encode({
+                user_id: user.id
+            }, secret_key)
+
+            render json: {
+                token: token
+            }
+        else
+            render status: :unauthorized
+        end
     end
-  end
-
-private
-
-  def user_login_params
-    params.require(:user).permit(:username, :password)
   end
 end
