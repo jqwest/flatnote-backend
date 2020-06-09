@@ -1,23 +1,20 @@
 class AuthController < ApplicationController
-  # skip_before_action :authorized, only: [:create]
-  def login
-    user = User.find_by(username: params[:username])
-
-    if !user
-        render status: :unauthorized
-    else
-        if user.authenticate(params[:password])
-            secret_key = Rails.application.secrets.secret_key_base[0]
-            token = JWT.encode({
-                user_id: user.id
-            }, secret_key)
-
-            render json: {
-                token: token
-            }
+    def login
+        user = User.find_by(username: params[:username])
+    
+        if user && user.authenticate(params[:password])
+          token = encode_token(user.id)
+          render json: {user: user, token: token}
         else
-            render status: :unauthorized
+          render json: {errors: "Incorrect Username or Password"}
         end
-    end
-  end
+      end
+    
+      def auto_login
+        if session_user
+          render json: session_user
+        else 
+          render json: {errors: "User not found"}
+        end
+      end
 end

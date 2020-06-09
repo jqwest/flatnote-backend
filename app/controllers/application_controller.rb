@@ -1,17 +1,28 @@
 class ApplicationController < ActionController::API
-    # before_action :authenticate
-    def authenticate
-        authorization_header = request.headers[:authorization]
-        
-        if !authorization_header
-            render status: :unauthorized
-        else
-            token = authorization_header.split(" ")[1]
-            secret_key = Rails.application.secrets.secret_key_base[0]
-            decoded_token = JWT.decode(token, secret_key)
 
-            # byebug
-            @user = User.find(decoded_token[0]["user_id"])
-        end
+    def encode_token(id)
+      JWT.encode({user_id: id}, "super_secret_code")
     end
-end
+  
+    def get_auth_header
+      request.headers["Authorization"]
+    end
+  
+    def decoded_token
+      begin
+        JWT.decode(get_auth_header, "super_secret_code")[0]["user_id"]
+      rescue
+        nil
+      end
+    end
+  
+    def session_user
+      User.find_by(id: decoded_token)
+    end
+  
+    def logged_in?
+      !!session_user
+    end
+  
+  end
+  
