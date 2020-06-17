@@ -1,3 +1,3 @@
-ActiveModel::Serializer
-  attributes :id, :title, :note, :user_id, :created_at, :updated_at
+class NoteSerializer < ActiveModel::Serializer
+  attributes :id, :title, :note, :created_at
 end
