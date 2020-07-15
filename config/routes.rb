@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :users, only:[:create, :index]
-  resources :notes, only:[:craete, :index, :show, :update, :destroy]
+  resources :users
   resources :tags
   resources :notes_tags
+  resources :notes
 
   post "/login", to: "auth#login"
 
@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   get "/profile", to: "users#profile"
 
   get "/auto_login", to: "auth#auto_login"
+
+  # get "/notes/:id/", to: "notes#index"
 
 end
