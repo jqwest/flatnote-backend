@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   get "/auto_login", to: "auth#auto_login"
 
+
+  delete '/logout', to: "auth#logout"
+
   # get "/notes/:id/", to: "notes#index"
 
 end
