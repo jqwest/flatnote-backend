@@ -6,7 +6,7 @@ class AuthController < ApplicationController
       token = encode_token(user.id)
         render json: {user: user, token: token}
     else
-      render json: {errors: "Incorrect Username or Password"}
+      render json: {}
     end
   end
 

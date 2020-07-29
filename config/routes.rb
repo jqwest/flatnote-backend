@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :notes_tags
   resources :notes
 
+  get "/login", to: "auth#login"
   post "/login", to: "auth#login"
+
 
   post "/signup", to: "users#create"
 
