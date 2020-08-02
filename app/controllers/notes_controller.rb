@@ -19,6 +19,13 @@ class NotesController < ApplicationController
       end
   end
 
+    def user_notes
+        user = User.find_by(id: params[:user_id])
+        notes = user.notes 
+        render json: notes 
+    end
+
+
   def update
       @note = Note.find(params[:id])
       if @note.valid?
