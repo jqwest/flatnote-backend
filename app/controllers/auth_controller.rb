@@ -15,11 +15,11 @@ class AuthController < ApplicationController
     render json: { status: 200, logged_out: true } 
   end
     
-  def auto_login
-    if session_user
-        render json: session_user
-    else 
-      render json: {errors: "User not found"}
-    end
-  end
+  # def auto_login
+  #   if session_user
+  #       render json: session_user
+  #   else 
+  #     render json: {errors: "User not found"}
+  #   end
+  # end
 end
