@@ -19,5 +19,6 @@ Rails.application.routes.draw do
   delete '/logout', to: "auth#logout"
 
   # get "/notes/:id/", to: "notes#index"
+  root 'welcome#index'
 
 end
