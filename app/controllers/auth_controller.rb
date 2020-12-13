@@ -6,6 +6,7 @@ class AuthController < ApplicationController
       token = encode_token(user.id)
         render json: {user: user, token: token}
     else
+      flash[:danger] = 'Invalid email/password'
       render json: {}
     end
   end
