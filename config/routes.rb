@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :tags
   resources :notes_tags
   resources :notes
-
+  resources :sessions, only: [:create]
   get "/login", to: "auth#login"
   post "/login", to: "auth#login"
 
@@ -20,5 +20,7 @@ Rails.application.routes.draw do
 
   # get "/notes/:id/", to: "notes#index"
   root 'welcome#index'
+
+
 
 end
