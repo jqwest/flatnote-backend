@@ -10,9 +10,7 @@ Rails.application.routes.draw do
 
   post "/signup", to: "users#create"
 
-  get "/profile", to: "users#profile"
-
-  # get "/auto_login", to: "auth#auto_login"
+  get '/users/find_by_username', to: 'users#show'
 
   get "/user_notes/:user_id", to: "notes#user_notes"
   
