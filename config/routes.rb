@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   post "/signup", to: "users#create"
 
-  get '/users/find_by_username', to: 'users#show'
+  get '/current_user', to: 'auth#show'
 
   get "/user_notes/:user_id", to: "notes#user_notes"
   
@@ -18,5 +18,7 @@ Rails.application.routes.draw do
 
   # get "/notes/:id/", to: "notes#index"
   root 'welcome#index'
+  # get '/current_user', to: 'auth#show'
+
 
 end
