@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "/login", to: "users#login"
 
 
+
   post "/signup", to: "users#create"
 
   get '/current_user', to: 'auth#show'
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
   # get "/notes/:id/", to: "notes#index"
   root 'welcome#index'
   # get '/current_user', to: 'auth#show'
+
+
 
 
 end
