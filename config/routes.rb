@@ -3,16 +3,15 @@ Rails.application.routes.draw do
   resources :tags
   resources :notes_tags
   resources :notes
-  resources :sessions, only: [:create]
-  get "/login", to: "auth#login"
-  post "/login", to: "auth#login"
+
+  get "/auto_login", to: "users#auto_login"
+  post "/login", to: "users#login"
+
 
 
   post "/signup", to: "users#create"
 
-  get "/profile", to: "users#profile"
-
-  # get "/auto_login", to: "auth#auto_login"
+  get '/current_user', to: 'auth#show'
 
   get "/user_notes/:user_id", to: "notes#user_notes"
   
@@ -20,6 +19,8 @@ Rails.application.routes.draw do
 
   # get "/notes/:id/", to: "notes#index"
   root 'welcome#index'
+  # get '/current_user', to: 'auth#show'
+
 
 
 
